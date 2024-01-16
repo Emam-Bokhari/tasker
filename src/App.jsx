@@ -1,5 +1,6 @@
 import { Fragment } from "react"
 import Navbar from "./Navbar"
+import HeroSection from "./HeroSection"
 
 
 const App = () => {
@@ -7,7 +8,9 @@ const App = () => {
     <Fragment>
 
       <Navbar />
+      <HeroSection />
       
+
     </Fragment>
   )
 }
