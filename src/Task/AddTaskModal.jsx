@@ -1,65 +1,98 @@
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 
-const AddTaskModal = () => {
+const AddTaskModal = ({handleAddNewTask}) => {
+
+    const [task, setTask] = useState({
+        id:crypto.randomUUID(),
+        title: "",
+        description: "",
+        tags: [],
+        priority: "",
+        isFavourite: false
+    })
+
+    const handleChange = (event) => {
+
+        const name = event.target.name
+        let value = event.target.value
+
+        if (name === 'tags') {
+            value = value.split(',')
+        }
+
+        setTask({
+            ...task,
+            [name]: value
+        })
+    }
+
     return (
         <Fragment>
             <div className="bg-black opacity-70 absolute top-0 left-0 z-10 h-full w-full" ></div>
 
             <form
-                class="mx-auto my-10 w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11 z-10 absolute top-1/2 lg:left-1/3"
+                className="mx-auto my-10 w-full max-w-[740px] rounded-xl border border-[#FEFBFB]/[36%] bg-[#191D26] p-9 max-md:px-4 lg:my-20 lg:p-11 z-10 absolute top-1/2 lg:left-1/3"
             >
                 <h2
-                    class="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]"
+                    className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]"
                 >
                     Add New Task
                 </h2>
 
                 {/* inputs */}
-                <div class="space-y-9 text-white lg:space-y-10">
+                <div className="space-y-9 text-white lg:space-y-10">
                     {/* title */}
-                    <div class="space-y-2 lg:space-y-3">
-                        <label for="title">Title</label>
+                    <div className="space-y-2 lg:space-y-3">
+                        <label htmlFor="title">Title</label>
                         <input
-                            class="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
+                            className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                             type="text"
                             name="title"
                             id="title"
+                            value={task.title}
+                            onChange={handleChange}
                             required
                         />
                     </div>
                     {/* description */}
-                    <div class="space-y-2 lg:space-y-3">
-                        <label for="description">Description</label>
+                    <div className="space-y-2 lg:space-y-3">
+                        <label htmlFor="description">Description</label>
                         <textarea
-                            class="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
+                            className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
                             type="text"
                             name="description"
                             id="description"
+                            value={task.description}
+                            onChange={handleChange}
                             required
                         ></textarea>
                     </div>
                     {/* input group */}
                     <div
-                        class="grid-cols-2 gap-x-4 max-md:space-y-9 md:grid lg:gap-x-10 xl:gap-x-20"
+                        className="grid-cols-2 gap-x-4 max-md:space-y-9 md:grid lg:gap-x-10 xl:gap-x-20"
                     >
                         {/* tags */}
-                        <div class="space-y-2 lg:space-y-3">
-                            <label for="tags">Tags</label>
+                        <div className="space-y-2 lg:space-y-3">
+                            <label htmlFor="tags">Tags</label>
                             <input
-                                class="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
+                                className="block w-full rounded-md bg-[#2D323F] px-3 py-2.5"
                                 type="text"
                                 name="tags"
                                 id="tags"
+                                value={task.tags}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
                         {/* priority */}
-                        <div class="space-y-2 lg:space-y-3">
-                            <label for="priority">Priority</label>
+                        <div className="space-y-2 lg:space-y-3">
+                            <label htmlFor="priority">Priority</label>
                             <select
-                                class="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
+                                className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                                 name="priority"
                                 id="priority"
+                                value={task.priority}
+                                onChange={handleChange}
                                 required
                             >
                                 <option value="">Select Priority</option>
@@ -71,10 +104,11 @@ const AddTaskModal = () => {
                     </div>
                 </div>
                 {/* input ends */}
-                <div class="mt-16 flex justify-center lg:mt-20">
+                <div className="mt-16 flex justify-center lg:mt-20">
                     <button
+                    onClick={()=>handleAddNewTask(task)}
                         type="submit"
-                        class="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
+                        className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
                     >
                         Create new Task
                     </button>

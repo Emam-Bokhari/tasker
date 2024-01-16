@@ -18,6 +18,15 @@ const TaskBoard = () => {
 
     const [AddTaskShowModal, setAddTaskShowModal] = useState(false)
 
+    function handleAddNewTask(task){
+        console.log(task)
+        setTasks([
+            ...tasks,
+            task
+        ])
+        setAddTaskShowModal(false)
+    }
+
 
     return (
         <Fragment>
@@ -25,7 +34,7 @@ const TaskBoard = () => {
             <section className="mb-20" id="tasks">
 
                 <div className="container">
-                    {AddTaskShowModal && <AddTaskModal />}
+                    {AddTaskShowModal && <AddTaskModal handleAddNewTask={handleAddNewTask} />}
 
 
                     {/* Searchbox */}
@@ -36,7 +45,7 @@ const TaskBoard = () => {
                     <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 
                         {/* TaskActions */}
-                        <TaskActions handleAddTask={() => setAddTaskShowModal(true)} />
+                        <TaskActions handleAddTaskModal={() => setAddTaskShowModal(true)} />
 
                         {/* TaskList */}
                         <TaskList tasks={tasks} />
