@@ -62,6 +62,13 @@ const TaskBoard = () => {
         setTasks(tasksAfterDelete)
     }
 
+    // delete all tasks
+    function handleDeleteAll() {
+        tasks.length = 0
+        // console.log(tasks)
+        setTasks([...tasks])
+    }
+
 
 
 
@@ -86,7 +93,9 @@ const TaskBoard = () => {
                     <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
 
                         {/* TaskActions */}
-                        <TaskActions handleAddTaskModal={() => setAddTaskShowModal(true)} />
+                        <TaskActions
+                            handleDeleteAll={handleDeleteAll}
+                            handleAddTaskModal={() => setAddTaskShowModal(true)} />
 
                         {/* TaskList */}
                         <TaskList
