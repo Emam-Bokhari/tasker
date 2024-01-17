@@ -49,6 +49,13 @@ const TaskBoard = () => {
         setAddTaskShowModal(true)
     }
 
+    // cancel
+    function handleCancel(){
+        setAddTaskShowModal(false)
+        setTaskToUpdate(null)
+
+    }
+
 
     return (
         <Fragment>
@@ -56,7 +63,9 @@ const TaskBoard = () => {
             <section className="mb-20" id="tasks">
 
                 <div className="container">
-                    {AddTaskShowModal && <AddTaskModal handleAddNewTask={handleAddNewTask}
+                    {AddTaskShowModal && <AddTaskModal 
+                    handleCancel={handleCancel}
+                    handleAddNewTask={handleAddNewTask}
                         taskToUpdate={taskToUpdate}
                     />}
 
