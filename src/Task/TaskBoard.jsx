@@ -6,12 +6,12 @@ import AddTaskModal from "./AddTaskModal"
 
 const TaskBoard = () => {
     const defaultTask = {
-        "id": crypto.randomUUID(),
-        "title": "Integration API",
-        "description": "Connect an existing API to a third-party database using secure methods and handle data exchange efficiently.",
-        "tags": ['Web', 'Python', 'Api'],
-        "priority": "High",
-        "isFavourite": true
+        id: crypto.randomUUID(),
+        title: "Integration API",
+        description: "Connect an existing API to a third-party database using secure methods and handle data exchange efficiently.",
+        tags: ['Web', 'Python', 'Api'],
+        priority: "High",
+        isFavourite: true
     }
 
     const [tasks, setTasks] = useState([defaultTask])
@@ -69,6 +69,22 @@ const TaskBoard = () => {
         setTasks([...tasks])
     }
 
+    // favourite task
+    function handleFavourite(taskId) {
+        // console.log(taskId)
+        const taskIndex = tasks.findIndex(task => task.id === taskId)
+
+        const newTasks = [...tasks]
+        // console.log(taskIndex)
+        // console.log(newTasks)
+
+        newTasks[taskIndex].isFavourite = !newTasks[taskIndex].isFavourite
+        console.log(newTasks)
+
+        setTasks(newTasks)
+
+    }
+
 
 
 
@@ -99,8 +115,10 @@ const TaskBoard = () => {
 
                         {/* TaskList */}
                         <TaskList
+                            handleFavourite={handleFavourite}
                             handleDeleteTask={handleDeleteTask}
-                            tasks={tasks} handleEditTask={handleEditTask} />
+                            tasks={tasks}
+                            handleEditTask={handleEditTask} />
 
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import { FaStar } from "react-icons/fa";
 
-const TaskList = ({ tasks,handleEditTask,handleDeleteTask }) => {
+const TaskList = ({ tasks,handleEditTask,handleDeleteTask,handleFavourite }) => {
     return (
         <Fragment>
 
@@ -20,7 +20,11 @@ const TaskList = ({ tasks,handleEditTask,handleDeleteTask }) => {
                     <tbody>
                         {tasks.map((task) => (
                             <tr key={task.id} className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
-                                <td>{task.isFavourite ? <FaStar className="text-yellow-400" /> : <FaStar />}</td>
+                                <td>
+                                    <button onClick={()=>handleFavourite(task.id)} >
+                                    {task.isFavourite ? <FaStar className="text-yellow-400" /> : <FaStar />}
+                                    </button>
+                                </td>
                                 <td>{task.title}</td>
                                 <td>
                                     <div>
