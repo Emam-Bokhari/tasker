@@ -88,8 +88,15 @@ const TaskBoard = () => {
     // search
     function onSearch(searchTerm) {
         console.log(searchTerm)
+
         const search = tasks.filter(task => task.title.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()))
-        setTasks([...search])
+
+        const searchPriority = tasks.filter(task => task.priority.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()))
+
+        if (search || searchPriority) {
+            setTasks([...search,...searchPriority])
+        }
+
     }
 
 
