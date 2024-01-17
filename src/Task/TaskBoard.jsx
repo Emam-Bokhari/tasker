@@ -3,6 +3,7 @@ import Searchbox from "./Searchbox"
 import TaskActions from "./TaskActions"
 import TaskList from "./TaskList"
 import AddTaskModal from "./AddTaskModal"
+import NoTaskFound from "./NoTaskFound"
 
 const TaskBoard = () => {
     const defaultTask = {
@@ -94,7 +95,7 @@ const TaskBoard = () => {
         const searchPriority = tasks.filter(task => task.priority.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()))
 
         if (search || searchPriority) {
-            setTasks([...search,...searchPriority])
+            setTasks([...search, ...searchPriority])
         }
 
     }
@@ -128,11 +129,19 @@ const TaskBoard = () => {
                             handleAddTaskModal={() => setAddTaskShowModal(true)} />
 
                         {/* TaskList */}
-                        <TaskList
-                            handleFavourite={handleFavourite}
-                            handleDeleteTask={handleDeleteTask}
-                            tasks={tasks}
-                            handleEditTask={handleEditTask} />
+                        {
+                            tasks.length > 0 ? (
+                                <TaskList
+                                    handleFavourite={handleFavourite}
+                                    handleDeleteTask={handleDeleteTask}
+                                    tasks={tasks}
+                                    handleEditTask={handleEditTask} />
+                            )
+                                :
+                                (<NoTaskFound />)
+
+
+                        }
 
                     </div>
                 </div>
