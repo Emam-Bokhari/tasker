@@ -1,7 +1,7 @@
 import { Fragment } from "react"
 import { FaStar } from "react-icons/fa";
 
-const TaskList = ({ tasks,handleEditTask }) => {
+const TaskList = ({ tasks,handleEditTask,handleDeleteTask }) => {
     return (
         <Fragment>
 
@@ -40,7 +40,7 @@ const TaskList = ({ tasks,handleEditTask }) => {
                                 <td className="text-center">{task.priority}</td>
                                 <td>
                                     <div className="flex items-center justify-center space-x-3">
-                                        <button className="text-red-500">Delete</button>
+                                        <button onClick={()=>handleDeleteTask(task.id)} className="text-red-500">Delete</button>
                                         <button
                                         onClick={()=>handleEditTask(task)}
                                         className="text-blue-500">Edit</button>

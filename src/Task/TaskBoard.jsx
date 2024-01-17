@@ -28,10 +28,10 @@ const TaskBoard = () => {
                 ...tasks,
                 newTask
             ])
-        }else{
+        } else {
             setTasks(
-                tasks.map((task)=>{
-                    if(task.id===newTask.id){
+                tasks.map((task) => {
+                    if (task.id === newTask.id) {
                         return newTask
                     }
                     return task
@@ -50,11 +50,19 @@ const TaskBoard = () => {
     }
 
     // cancel
-    function handleCancel(){
+    function handleCancel() {
         setAddTaskShowModal(false)
         setTaskToUpdate(null)
 
     }
+
+    // delete task
+    function handleDeleteTask(taskId) {
+        const tasksAfterDelete = tasks.filter(task => task.id !== taskId)
+        setTasks(tasksAfterDelete)
+    }
+
+
 
 
     return (
@@ -63,9 +71,9 @@ const TaskBoard = () => {
             <section className="mb-20" id="tasks">
 
                 <div className="container">
-                    {AddTaskShowModal && <AddTaskModal 
-                    handleCancel={handleCancel}
-                    handleAddNewTask={handleAddNewTask}
+                    {AddTaskShowModal && <AddTaskModal
+                        handleCancel={handleCancel}
+                        handleAddNewTask={handleAddNewTask}
                         taskToUpdate={taskToUpdate}
                     />}
 
@@ -81,7 +89,9 @@ const TaskBoard = () => {
                         <TaskActions handleAddTaskModal={() => setAddTaskShowModal(true)} />
 
                         {/* TaskList */}
-                        <TaskList tasks={tasks} handleEditTask={handleEditTask} />
+                        <TaskList
+                            handleDeleteTask={handleDeleteTask}
+                            tasks={tasks} handleEditTask={handleEditTask} />
 
                     </div>
                 </div>
