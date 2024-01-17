@@ -1,15 +1,17 @@
 import { Fragment, useState } from "react"
 
-const AddTaskModal = ({handleAddNewTask}) => {
+const AddTaskModal = ({ handleAddNewTask, taskToUpdate }) => {
 
-    const [task, setTask] = useState({
-        id:crypto.randomUUID(),
+    const [task, setTask] = useState(taskToUpdate || {
+        id: crypto.randomUUID(),
         title: "",
         description: "",
         tags: [],
         priority: "",
         isFavourite: false
     })
+
+    const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null))
 
     const handleChange = (event) => {
 
@@ -36,7 +38,7 @@ const AddTaskModal = ({handleAddNewTask}) => {
                 <h2
                     className="mb-9 text-center text-2xl font-bold text-white lg:mb-11 lg:text-[28px]"
                 >
-                    Add New Task
+                    {isAdd ? 'Add New Task' : 'Edit Task'}
                 </h2>
 
                 {/* inputs */}
@@ -106,7 +108,7 @@ const AddTaskModal = ({handleAddNewTask}) => {
                 {/* input ends */}
                 <div className="mt-16 flex justify-center lg:mt-20">
                     <button
-                    onClick={()=>handleAddNewTask(task)}
+                        onClick={() => handleAddNewTask(task, isAdd)}
                         type="submit"
                         className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
                     >
